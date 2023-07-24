@@ -35,6 +35,7 @@ const User = () => {
       });
   };
 
+      
   return (
     <div>
       {User.map((ele) => (
@@ -51,28 +52,34 @@ const User = () => {
             alignItems: 'center'
           }}
         >
-          <div>
-            <p>Personal name : {ele.personalName}</p>
-            <p>User name : {ele.userName}</p>
-            <p>Email id : {ele.emailId}</p>
-            <p>Contact Info : {ele.contactInfo}</p>
+          <div style={{width: '20rem'}}>
+            <p>Personal name : <span style={{color: 'blue'}}>{ele.personalName}</span></p>
+            <p>User name : <span style={{color: 'blue'}}>{ele.userName}</span></p>
+            <p>Email id : <span style={{color: 'blue'}}>{ele.emailId}</span></p>
+            <p>Contact Info : <span style={{color: 'blue'}}>{ele.contactInfo}</span></p>
           </div>
-          <div style={{ width: '10rem', height:'80%', border: '1px solid', borderRadius: '50%'}}>
-            <img src={ele.profilePicture} alt="cover"  style={{width: '100%', height: '100%',borderRadius: '50%'}}/>
+          <div style={{ width: '10rem', height:'20vh',display:'flex', justifyContent:'center', alignItems:'center', border: '1px solid', borderRadius: '50%'}}>
+            <img src={ele.profilePicture} alt="cov"  style={{width: '100%', height: '100%',borderRadius: '50%'}}/>
           </div>
           <div>
             <button style={{
             backgroundColor: "red",
             color: "white",
-            padding: "5px 25px",
-            
+            padding: "15px 25px",
+            border: 'none',
+            borderRadius: '20px',
+            cursor: "pointer"
           }} onClick={() => handleDelete(ele._id)}>Delete</button>
           </div>
           <div>
             <button style={{
             backgroundColor: "blue",
             color: "white",
-            padding: "5px 25px",
+            padding: "15px 25px",
+            border: 'none',
+            borderRadius: '20px',
+            cursor: "pointer"
+            
           }} onClick={() => navigate(`/update-user/${ele._id}`)} >Update</button>
           </div>
         </div>

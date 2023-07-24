@@ -56,6 +56,7 @@ const UpdateUser = () => {
 
   return (
     <div>
+        <h2>Profile of <span style={{textDecoration:'underline'}}>{user.personalName}</span></h2>
       <form
         onSubmit={handleUpdate}
         style={{
@@ -63,6 +64,7 @@ const UpdateUser = () => {
           margin: " 20px auto",
           border: "1px solid lightGrey",
           padding: "20px",
+          borderRadius: '15px'
         }}
       >
         <label style={{ margin: "auto 10px auto auto" }}>Personal Name</label>
@@ -123,6 +125,7 @@ const UpdateUser = () => {
             backgroundColor: "blue",
             color: "white",
             padding: "5px 25px",
+            cursor: "pointer"
           }}
         ></input>
       </form>
@@ -132,6 +135,7 @@ const UpdateUser = () => {
             backgroundColor: "red",
             color: "white",
             padding: "5px 25px",
+            cursor: "pointer"
           }}
           onClick={() => navigate("/")}
         >

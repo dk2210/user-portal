@@ -1,8 +1,10 @@
 import React from "react";
-import { useState } from "react";
+import { useState,  } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {
+
   const [user, setUser] = useState({
     personalName: "",
         emailId: "",
@@ -10,14 +12,20 @@ const AddUser = () => {
         contactInfo: "",
         profilePicture: ""
   });
+  const navigate = useNavigate();
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(user);
+    // setSelectedFile(file);
     axios
       .post("http://localhost:3030/user/create-user", user)
       .then((res) => {
         console.log(res, "getting response");
+        alert("User registered successfully");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -26,12 +34,28 @@ const AddUser = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if(e.target.files){
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = () => { 
+        console.log(reader.result);
+    setUser({ ...user, [name]: reader.result });
+      }
+    }else {
+      setUser({ ...user, [name]: value });
+    }
     console.log("Getting Name  & value", name, value);
-    setUser({ ...user, [name]: value });
   };
+
+  // const handleUploadFile = (event) => {
+  //   // Capture the selected file from the input element
+  //   const file = event.target.files[0];
+  //   setSelectedFile(file);
+  // };
 
   return (
     <div>
+      <h2>Registeration Form</h2>
       <form onSubmit={handleSubmit}  style={{
           width: "50%",
           margin: " 20px auto",
@@ -75,13 +99,14 @@ const AddUser = () => {
         ></input>
         <br />
         <label style={{ margin: "auto 10px auto auto" }}>upload profile picture</label>
-        <input type="file" onChange={(e) => handleChange(e)} name="profilePicture"></input>
+        <input type="file" accept="file_extension|image/*|media_type" onChange={(e) => handleChange(e)} name="profilePicture"></input>
         <br />
         <input style={{
             backgroundColor: "blue",
             color: "white",
             padding: "5px 25px",
-            margin: '20px auto'
+            margin: '20px auto',
+            cursor: "pointer"
           }} type="submit"></input>
       </form>
     </div>
